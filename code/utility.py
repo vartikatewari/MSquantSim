@@ -1,5 +1,9 @@
 import pandas as pd
 
+def plot_indra(tsv_file, output_file=None):
+    """A simple placeholder function"""
+    print("plot_indra function called")
+    return None
 
 def read_df(file_path, delimiter=','):
     """
@@ -33,6 +37,8 @@ def read_df(file_path, delimiter=','):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         raise
+    return
+
 
 def show_protein_abundance_features(file_path):
     """
@@ -49,14 +55,109 @@ def show_protein_abundance_features(file_path):
 
     # Display the first few rows
     print("First few rows of the protein abundance matrix:")
-    display(data.head())
+    print(data.head())
 
     # Display summary statistics
     print("\nSummary statistics:")
-    display(data.describe())
+    print(data.describe())
 
     # Display column names and data types
     print("\nColumn names and data types:")
-    display(data.info())
+    print(data.info())
 
-    return data
+    return
+
+
+
+# def plot_indra(tsv_file, output_file=None, figsize=(10, 8)):
+#     """
+#     Plot a network graph from INDRA relationship data showing increase/decrease relationships.
+#
+#     Parameters:
+#     -----------
+#     tsv_file : str or pandas.DataFrame
+#         Path to the TSV file containing INDRA relationships or a pandas DataFrame
+#     output_file : str, optional
+#         Path to save the output figure. If None, the figure is displayed
+#     figsize : tuple, optional
+#         Size of the figure (width, height) in inches
+#
+#     Returns:
+#     --------
+#     G : networkx.DiGraph
+#         The created graph object
+#     """
+#     import pandas as pd
+#     import networkx as nx
+#     import matplotlib.pyplot as plt
+#     import matplotlib.patches as mpatches
+#
+#     # Read the TSV file if string is provided
+#     if isinstance(tsv_file, str):
+#         df = pd.read_csv(tsv_file, sep='\t')
+#     else:
+#         df = tsv_file
+#
+#     # Create directed graph
+#     G = nx.DiGraph()
+#
+#     # Define colors for the two relationship types
+#     colors = {
+#         'IncreaseAmount': 'green',
+#         'DecreaseAmount': 'red'
+#     }
+#
+#     # Add nodes and edges
+#     for _, row in df.iterrows():
+#         source = row['source_hgnc_symbol']
+#         target = row['target_hgnc_symbol']
+#         relation = row['relation']
+#
+#         # Skip if not an increase or decrease relation
+#         if relation not in colors:
+#             continue
+#
+#         # Add nodes
+#         G.add_node(source)
+#         G.add_node(target)
+#
+#         # Add edge with color based on relation
+#         G.add_edge(source, target, relation=relation, color=colors[relation])
+#
+#     # Create plot
+#     plt.figure(figsize=figsize)
+#
+#     # Position nodes using spring layout
+#     pos = nx.spring_layout(G, seed=42)
+#
+#     # Draw nodes
+#     nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=500, alpha=0.8)
+#
+#     # Draw node labels
+#     nx.draw_networkx_labels(G, pos, font_size=10, font_weight='bold')
+#
+#     # Draw edges with colors based on relationship type
+#     edge_colors = [G[u][v]['color'] for u, v in G.edges()]
+#     nx.draw_networkx_edges(G, pos, width=2, edge_color=edge_colors,
+#                            arrowsize=20, connectionstyle='arc3,rad=0.1')
+#
+#     # Add legend
+#     legend_items = [
+#         mpatches.Patch(color='green', label='Increase Amount'),
+#         mpatches.Patch(color='red', label='Decrease Amount')
+#     ]
+#     plt.legend(handles=legend_items, loc='upper right')
+#
+#     # Remove axis
+#     plt.axis('off')
+#     plt.title("INDRA Gene Regulatory Network")
+#
+#     # Save or display
+#     if output_file:
+#         plt.savefig(output_file, bbox_inches='tight')
+#         print(f"Figure saved to {output_file}")
+#     else:
+#         plt.tight_layout()
+#         plt.show()
+#
+#     return G

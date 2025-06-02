@@ -2,9 +2,6 @@ import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 
-
-
-
 def plot_indra(file_path, node_color='skyblue', edge_color='red', figsize=(8, 6)):
     """
     Reads an INDRA TSV file, creates a Prior Knowledge Network (PKN) as a directed graph, and plots it.
