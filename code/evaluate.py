@@ -33,3 +33,25 @@ def plot_correlation_matrix(data, figsize=(10, 8), cmap='coolwarm', annot=True, 
     except Exception as e:
         print(f"An error occurred while plotting the correlation matrix: {e}")
         raise
+
+
+def plot_corr(df, size=10):
+    '''Plot a graphical correlation matrix for a dataframe.
+
+    Input:
+        df: pandas DataFrame
+        size: vertical and horizontal size of the plot'''
+
+    cmap = sns.diverging_palette(220, 10, as_cmap=True)
+
+    # Compute the correlation matrix for the received dataframe
+    corr = df.corr()
+    corr = corr[corr <= 0.99]
+    # Plot the correlation matrix
+    fig, ax = plt.subplots(figsize=(size, size))
+    cax = ax.matshow(corr, cmap=cmap)
+    plt.xticks(range(len(corr.columns)), corr.columns, rotation=90);
+    plt.yticks(range(len(corr.columns)), corr.columns);
+
+    # Add the colorbar legend
+    cbar = fig.colorbar(cax, ticks=[-1, 0, 1], aspect=40, shrink=.8)

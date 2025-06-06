@@ -1,3 +1,9 @@
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+import numpy as np
+
 def run_random_forest(data, sample_size, rdata, replace):
     # Assume 'condition' is the target variable column in your CSV
     X = data.drop('Condition', axis=1)
