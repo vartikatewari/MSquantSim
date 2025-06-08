@@ -1,4 +1,10 @@
-matplotlib==3.5.2
+copulas==0.7.0
+matplotlib==3.10.3
 networkx==2.8.8
-pandas==1.1.3
-seaborn==0.11.2
+numpy==1.24.3
+pandas==2.0.3
+scikit_learn==1.1.2
+scipy==1.15.3
+sdv==0.16.0
+seaborn==0.13.2
+table_evaluator==1.6.1
