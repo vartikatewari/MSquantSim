@@ -68,6 +68,33 @@ def show_protein_abundance_features(file_path):
     return
 
 
+def add_missing_values(data, mar_param=0.0, mnar_params=(-3, 0.4)):
+    # data['Intensity'] = np.log2(data['Intensity'])  # Optional log transformation
+
+    data['True_Intensity'] = data['Intensity'].copy()
+
+    for i in range(len(data)):
+        mar_prob = np.random.uniform()
+        mnar_prob = np.random.uniform()
+
+        if pd.isna(data.loc[i, 'Intensity']):
+            mnar_thresh = 0
+        else:
+            mnar_thresh = 1 / (1 + np.exp(mnar_params[0] + mnar_params[1] * data.loc[i, 'Intensity']))
+
+        if mar_prob < mar_param:
+            data.loc[i, 'Intensity'] = np.nan
+            data.loc[i, 'MAR'] = True
+        else:
+            data.loc[i, 'MAR'] = False
+
+        if mnar_prob < mnar_thresh:
+            data.loc[i, 'Intensity'] = np.nan
+            data.loc[i, 'MNAR'] = True
+        else:
+            data.loc[i, 'MNAR'] = False
+
+    return data
 
 # def plot_indra(tsv_file, output_file=None, figsize=(10, 8)):
 #     """
