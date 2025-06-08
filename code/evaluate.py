@@ -35,12 +35,13 @@ def plot_correlation_matrix(data, figsize=(10, 8), cmap='coolwarm', annot=True, 
         raise
 
 
-def plot_corr(df, size=10):
+def plot_corr(df, size=10,font_scale=0.7):
     '''Plot a graphical correlation matrix for a dataframe.
 
     Input:
         df: pandas DataFrame
         size: vertical and horizontal size of the plot'''
+    plt.rcParams.update({'font.size': 8 * font_scale})
 
     cmap = sns.diverging_palette(220, 10, as_cmap=True)
 
@@ -52,6 +53,13 @@ def plot_corr(df, size=10):
     cax = ax.matshow(corr, cmap=cmap)
     plt.xticks(range(len(corr.columns)), corr.columns, rotation=90);
     plt.yticks(range(len(corr.columns)), corr.columns);
-
+    ax.set_xticklabels(corr.columns, rotation=90, fontsize=6 * font_scale)
+    ax.set_yticklabels(corr.columns, fontsize=6 * font_scale)
     # Add the colorbar legend
     cbar = fig.colorbar(cax, ticks=[-1, 0, 1], aspect=40, shrink=.8)
+    cbar.ax.tick_params(labelsize=6 * font_scale)
+
+    # Adjust layout to make room for labels
+    plt.tight_layout()
+
+    return 
