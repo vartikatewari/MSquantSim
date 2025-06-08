@@ -42,6 +42,23 @@ The repository includes three case studies demonstrating the application of MSqu
 - 33 proteins selected using prior knowledge network
 - Demonstrates robustness to missing data
 
+### Code Files
+The repository contains several Python modules for simulating and analyzing mass spectrometry data:
+downstreamanalysis.py: Implements random_forest for class prediction, PCA for discovery and p-val calculation for comparison.
+
+evaluate.py: Contains evaluation functions:
+plot_corr(): Visualizing correlation matrices
+calculate_similarity_score(): calculates the similarity score
+
+makepkn.py: Network visualization tools:
+plot_indra(): Creates and visualizes Prior Knowledge Networks from INDRA TSV files
+plot_learned_structure(): Plots learned network structures from CSV files
+
+utility.py: Helper functions for data handling:
+read_df(): Reads and validates CSV data files
+show_protein_abundance_features(): Displays protein abundance matrix statistics
+
+simulate.py: Contains the core simulation algorithms (copula-based, per-protein, and TVAE approaches)
 ## Detailed Notebooks
 See the Jupyter notebooks in the notebooks/ directory for detailed examples:
 
